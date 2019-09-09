@@ -3,7 +3,7 @@
 # File              : demoCode/bumpMapRegressor.py
 # Author            : Anonymous
 # Date              : 06.09.2019
-# Last Modified Date: 06.09.2019
+# Last Modified Date: 09.09.2019
 # Last Modified By  : Hai-Yong Jiang <haiyong.jiang1990@hotmail.com>
 from __future__ import print_function, division
 import torch
