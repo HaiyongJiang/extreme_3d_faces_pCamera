@@ -8,6 +8,11 @@ Python and C++ code for realistic 3D face modeling from single image using **[ou
 
 This page contains end-to-end demo code that estimates the 3D facial shape with realistic details directly from an unconstrained 2D face image. For a given input image, it produces standard ply files of the 3D face shape. It accompanies the deep networks described in our paper [1] and [2]. The occlusion recovery code, however, will be published in a future release. We also include demo code and data presented in [1].
 
+## Changes
+- Following the author's advice to add "violatile=True" for variables in line#320 of bumpMapRegressor.py (check https://github.com/anhttran/extreme_3d_faces/issues/35).  
+- update Dockerfile, and copy the built dlib to working directory. 
+- Output estimated camera parameters and object pose. 
+
 ## Dependencies
 
 ## Data requirements
