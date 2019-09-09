@@ -1,3 +1,10 @@
+/**
+ * File              : modules/PoseExpr/src/FaceServices2.cpp
+ * Author            : Anonymous 
+ * Date              : 08.09.2019
+ * Last Modified Date: 08.09.2019
+ * Last Modified By  : Hai-Yong Jiang <haiyong.jiang1990@hotmail.com>
+ */
 /* Copyright (c) 2015 USC, IRIS, Computer vision Lab */
 #include "FaceServices2.h"
 #include <fstream>
@@ -1794,6 +1801,19 @@ bool FaceServices2::combineBump(cv::Mat colorIm, cv::Mat lms, cv::Mat alpha, cv:
 		sprintf(text,"%s_final_frontal.ply",out_prefix.c_str());
 		write_plyShapeFloat(text,sub_v,fac_sub2);
 	}
+
+    if (outSet.cameraPose) {
+		sprintf(text,"%s_camera.txt",out_prefix.c_str());
+        std::ofstream fout(text);
+        for(int i=0; i<9; i++)
+            fout << _k[i] << " ";
+        fout << "\n";
+        for (int i=0;i<3;i++)
+            fout << vecR.at<float>(i,0) << " ";
+        fout << "\n";
+        for (int i=0;i<3;i++)
+            fout << vecT.at<float>(i,0) << " ";
+    }
 
 
 	return true;

@@ -7,14 +7,19 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 set(CUDA_USE_STATIC_CUDA_RUNTIME OFF)
 
 # DEFINE PATH TO YOUR THIRD PARTY LIBs
+set (DLIB_IN_PROJECT_BUILD false)
+# set (DLIB_INCLUDE_DIR "/usr/local/include/")
+# set (DLIB_LIB_DIR "/usr/local/lib/")
 set (DLIB_INCLUDE_DIR "/usr/local/include/")
 set (DLIB_LIB_DIR "/usr/local/lib/")
+# set (DLIB_INCLUDE_DIR "/home/haiyong/Project/FaceAU/extreme_3d_faces/dlib-19.6/")
+# set (DLIB_LIB_DIR "/usr/local/lib/")
 set (HDF5_INCLUDE_DIR "/usr/include/hdf5/serial")
 set (HDF5_LIB_DIR "/usr/lib/x86_64-linux-gnu/")
 
 # OpenCV
 if(UNIX)
-	find_package( OpenCV )
+    find_package( OpenCV PATHS /usr/local/OpenCV/)
 	MESSAGE("OpenCV information:") 
 	MESSAGE("  OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}") 
 	MESSAGE("  OpenCV_LIBRARIES: ${OpenCV_LIBS}") 

@@ -1,3 +1,10 @@
+/**
+ * File              : modules/PoseExpr/src/FImRenderer.cpp
+ * Author            : Anonymous 
+ * Date              : 08.09.2019
+ * Last Modified Date: 08.09.2019
+ * Last Modified By  : Hai-Yong Jiang <haiyong.jiang1990@hotmail.com>
+ */
 /* Copyright (c) 2015 USC, IRIS, Computer vision Lab */
 #include "FImRenderer.h"
 using namespace cv;

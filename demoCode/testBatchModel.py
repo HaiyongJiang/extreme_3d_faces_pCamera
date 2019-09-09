@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# File              : demoCode/testBatchModel.py
+# Author            : Anonymous
+# Date              : 06.09.2019
+# Last Modified Date: 08.09.2019
+# Last Modified By  : Hai-Yong Jiang <haiyong.jiang1990@hotmail.com>
 #############################################################################
 #Copyright 2017-2018, Anh Tuan Tran, Tal Hassner, Iacopo Masi, Eran Paz, Yuval Nirkin, and Gerard Medioni
 #The SOFTWARE provided in this page is provided "as is", without any guarantee
@@ -7,8 +14,8 @@
 # Please, cite the paper:
 # @article{tran16_3dmm_cnn,
 #   title={Extreme {3D} Face Reconstruction: Looking Past Occlusions},
-#   author={Anh Tran 
-#       and Tal Hassner 
+#   author={Anh Tran
+#       and Tal Hassner
 #       and Iacopo Masi
 #       and Eran Paz
 #       and Yuval Nirkin
@@ -21,7 +28,7 @@
 import os
 ## To suppress the noise output of Caffe when loading a model
 ## polish the output (see http://stackoverflow.com/questions/29788075/setting-glog-minloglevel-1-to-prevent-output-in-shell-from-caffe)
-os.environ['GLOG_minloglevel'] = '2' 
+os.environ['GLOG_minloglevel'] = '2'
 ###################
 import numpy as np
 from PIL import Image
@@ -134,7 +141,7 @@ with open(fileList, "r") as ins, open(data_out + "/imList.txt","w") as outs:
 		countIms = countIms + 1
 
 ###################################################
-##### Shape fitting ############################## 
+##### Shape fitting ##############################
 # load net
 MainModel = imp.load_source('MainModel', "../CNN/shape_model.py")
 net = torch.load(model_path)
@@ -181,3 +188,4 @@ bumpMapRegressor.estimateBump(bumpModel_path, data_out + "/imList.txt", data_out
 print("Recover the 3D models")
 print("./TestBump -batch " + data_out + "/imList.txt " + data_out + "/3D/ " + data_out + "/shape " + data_out + "/bump " + data_out + "/bump ../3DMM_model/BaselFaceModel_mod.h5 ../dlib_model/shape_predictor_68_face_landmarks.dat " + data_out + "/imgs " + data_out + "/imgs/ 1");
 os.system("./TestBump -batch " + data_out + "/imList.txt " + data_out + "/3D/ " + data_out + "/shape " + data_out + "/bump " + data_out + "/bump ../3DMM_model/BaselFaceModel_mod.h5 ../dlib_model/shape_predictor_68_face_landmarks.dat " + data_out + "/imgs " + data_out + "/imgs/ 1");
+

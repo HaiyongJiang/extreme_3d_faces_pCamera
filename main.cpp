@@ -1,3 +1,10 @@
+/**
+ * File              : main.cpp
+ * Author            : Anonymous 
+ * Date              : 06.09.2019
+ * Last Modified Date: 09.09.2019
+ * Last Modified By  : Hai-Yong Jiang <haiyong.jiang1990@hotmail.com>
+ */
 #include <fstream>
 
 #include "cv.h"
@@ -139,7 +146,8 @@ int main(int argc, char** argv)
 
     OutputSettings outSet;
     outSet.foundationFrontal = outSet.foundationAligned = outSet.withBumpAligned = outSet.finalFrontal = true;
-    outSet.sparseFullFrontal = outSet.withBumpFrontal = false;
+    outSet.sparseFullFrontal = outSet.withBumpFrontal = true;
+    outSet.cameraPose = true;
     // Batch mode
     if (argc > 1 && strcmp(argv[1],"-batch") == 0) {
 	    if (argc < 9) {

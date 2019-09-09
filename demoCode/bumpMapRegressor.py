@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# File              : demoCode/bumpMapRegressor.py
+# Author            : Anonymous
+# Date              : 06.09.2019
+# Last Modified Date: 06.09.2019
+# Last Modified By  : Hai-Yong Jiang <haiyong.jiang1990@hotmail.com>
 from __future__ import print_function, division
 import torch
 import glob
@@ -145,7 +152,7 @@ class UNet(nn.Module):
                 self.up_block64_32 = copy.deepcopy(_unet.up_block64_32)
                 self.up_block32_16 = copy.deepcopy(_unet.up_block32_16)
                 self.up_block32_16_mask = copy.deepcopy(_unet.up_block32_16_mask)
-        
+
                 self.last_alt = copy.deepcopy(_unet.last_alt)
                 self.last_alt_mask = copy.deepcopy(_unet.last_alt_mask)
         else:
@@ -164,7 +171,7 @@ class UNet(nn.Module):
                 self.up_block64_32 = UNetUpBlock(64, 32)
                 self.up_block32_16 = UNetUpBlock(32, 16)
                 self.up_block32_16_mask = UNetUpBlock(32, 16)
-                
+
                 self.last_alt = nn.Conv2d(16,1,3,1,1)
                 self.last_alt_mask = nn.Conv2d(16,1,3,1,1)
         self.tanh = nn.Tanh()
@@ -270,7 +277,7 @@ class Net(nn.Module):
         criterionBCE = nn.BCELoss()
         self.g_fake = self.Dnet.forward(self.recon)
         self.GBCE_loss = criterionBCE(self.g_fake, Variable(torch.ones(self.g_fake.size()).cuda()))
-                
+
                 #Reconstruction loss
         self.GL1_loss = criterionL1(self.recon,l) + self.GLoss(self.recon,l)
         self.GL1_mask_loss = criterionL1(self.recon_mask,m) + self.GLoss(self.recon_mask,m)
@@ -316,15 +323,16 @@ class Net(nn.Module):
         for i,batch in enumerate(self.test_dataloader):
             images = batch['image']
             images = images.float()
-	    imName = batch['name'][0]
-            images = Variable(images.cuda())
+            imName = batch['name'][0]
+            images = Variable(images.cuda(), volatile=True)
             recon_mask, recon = self.Gnet.forward(images)
-	    reconmat = recon.data.cpu().numpy()
-	    reconmat = (reconmat[0,0,:,:]+1)*255/2
-	    reconmat_mask = recon_mask.data.cpu().numpy()
-	    reconmat_mask = reconmat_mask[0,0,:,:]*255
-	    cv2.imwrite(net.outpath + '/'+imName + '_bump.png',reconmat)
-	    cv2.imwrite(net.outpath + '/'+imName + '_mask.png',reconmat_mask)
+            reconmat = recon.data.cpu().numpy()
+            reconmat = (reconmat[0,0,:,:]+1)*255/2
+            reconmat_mask = recon_mask.data.cpu().numpy()
+            reconmat_mask = reconmat_mask[0,0,:,:]*255
+            cv2.imwrite(net.outpath + '/'+imName + '_bump.png',reconmat)
+            cv2.imwrite(net.outpath + '/'+imName + '_mask.png',reconmat_mask)
+
 
 def estimateBump(modelPath, imList, outPath):
     global net

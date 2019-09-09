@@ -1,4 +1,5 @@
-FROM mxnet/python:1.1.0_nccl
+# FROM mxnet/python:1.1.0_nccl
+FROM mxnet/python:1.1.0_gpu_cuda8
 WORKDIR /app
 ADD . /app
 
@@ -15,7 +16,7 @@ RUN wget http://dlib.net/files/dlib-19.6.tar.bz2; \
 	make install; \
 	cd ..
 
-RUN pip install http://download.pytorch.org/whl/cu90/torch-0.3.1-cp27-cp27mu-linux_x86_64.whl
+RUN pip install http://download.pytorch.org/whl/cu80/torch-0.3.1-cp27-cp27mu-linux_x86_64.whl
 RUN pip install opencv-python torchvision==0.2.1 scikit-image cvbase pandas mmdnn dlib
 
 RUN mkdir build; \
@@ -27,6 +28,8 @@ RUN mkdir build; \
 
 WORKDIR /app/demoCode
 EXPOSE 80
+
+RUN cp ../dlib-19.6/build/dlib/libdlib.so* .
 
 ENV NAME World
 
